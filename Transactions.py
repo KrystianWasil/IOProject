@@ -22,27 +22,25 @@ class TypeOfTransaction:
         print(f"Deleted: {self.transaction_type} - {self.date}")
 
     def edit(self, id):
-        for transaction in transactions:
-            if transaction.id == id:
-                print("Type to change?")
-                print("1. Date")
-                print("2. Amount")
-                print("3. Category")
-                print("4. Payment type")
-                print("5. Transaction type")
-                choice = input()
-                if choice == 1:
-                    transaction.date = input("Enter new date: ")
-                elif choice == 2:
-                    transaction.amount = input("Enter new amount: ")
-                elif choice == 3:
-                    transaction.category = input("Enter new category: ")
-                elif choice == 4:
-                    transaction.payment_type = input("Enter new payment type: ")
-                elif choice == 5:
-                    transaction.transaction_type = input("Enter new transaction type: ")
-                else:
-                    print("Invalid choice")
+        print("Type to change?")
+        print("1. Date")
+        print("2. Amount")
+        print("3. Category")
+        print("4. Payment type")
+        print("5. Transaction type")
+        choice = input()
+        if choice == 1:
+            self.date = input("Enter new date: ")
+        elif choice == 2:
+            self.amount = input("Enter new amount: ")
+        elif choice == 3:
+            self.category = input("Enter new category: ")
+        elif choice == 4:
+            self.payment_type = input("Enter new payment type: ")
+        elif choice == 5:
+            self.transaction_type = input("Enter new transaction type: ")
+        else:
+            print("Invalid choice")
 
 
 class TransactionIncome(TypeOfTransaction):

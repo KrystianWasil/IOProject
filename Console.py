@@ -37,31 +37,46 @@ if choice == '2':
 
 #     >>>> User signed in
 
+while True:
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    print("Choose your activity: ")
 
-print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-print("Choose your activity: ")
+    print("1. Make transaction\n"
+          "2, Edit transaction\n"
+          "3. Delete transaction\n"
+          "4. Show statistics\n"
+          )
+    choice = input("Enter choice: ")
+    if choice == '1':
+        print("Enter Transaction")
+        d = input("Enter date: ")
+        a = input("Enter amount: ")
+        c = input("Enter category: ")
+        pt = input("Enter payment type: ")
+        tt = input("Enter transaction type: ")
+        id = input("Enter id: ")
+        transaction = Client.Client.make_transaction(d, a, c, pt, tt, id)
+        transaction.save()
+        print("Transaction saved")
+    #     >>>> Transaction saved
+    #     opulod statistic czyli zrobienie statystyk edytowanie ususawnie i wysweitlanie ich i w sumie tyle poczytaj o dacie i bedzie git
+    if choice == '2':
+        print("Enter id of transaction to edit")
+        id = input("Enter id: ")
+        for i in transactions:
+            if i.id == id:
+                i.edit(id)
+                print("Transaction edited")
 
-print("1. Make transaction\n"
-      "2, Edit transaction\n"
-      "3. Delete transaction\n"
-      "4. Show statistics\n"
-      )
-choice = input("Enter choice: ")
-if choice == '1':
-    print("Enter Transaction")
-    d = input("Enter date: ")
-    a = input("Enter amount: ")
-    c = input("Enter category: ")
-    pt = input("Enter payment type: ")
-    tt = input("Enter transaction type: ")
-    id = input("Enter id: ")
-    transaction = Client.Client.make_transaction(d, a, c, pt, tt, id)
-    transaction.save()
-#     opulod statistic czyli zrobienie statystyk edytowanie ususawnie i wysweitlanie ich i w sumie tyle poczytaj o dacie i bedzie git
+    if choice == '3':
+        print("Enter id of transaction to delete")
+        id = input("Enter id: ")
+        for i in transactions:
+            if i.id == id:
+                i.delete(id)
+                print("Transaction deleted")
+    if choice == '4':
 
-print(transactions)
-
-print(">>>>>>>>>>> T E S T >>>>>>>>>>>>")
 
 
 

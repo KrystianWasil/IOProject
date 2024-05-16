@@ -26,3 +26,4 @@ class Statistics:
                 self.category_count[transaction.category] += 1
             else:
                 self.category_count[transaction.category] = 1
+        self.most_common_category = max(self.category_count, key=self.category_count.get)

@@ -2,11 +2,12 @@ import Client
 from LogIn import LogIn
 from SignIn import SignIn
 from Collections import users
-from Transactions import transactions
+from Transactions import transactions, TypeOfTransaction
+from os import system
 
 # Bank app
 # User to my
-
+user = None
 print("Welcome to the bank app "
       "\n1. Log in"
       "\n2. Sign in")
@@ -42,7 +43,7 @@ while True:
     print("Choose your activity: ")
 
     print("1. Make transaction\n"
-          "2, Edit transaction\n"
+          "2. Edit transaction\n"
           "3. Delete transaction\n"
           "4. Show statistics\n"
           )
@@ -55,29 +56,27 @@ while True:
         pt = input("Enter payment type: ")
         tt = input("Enter transaction type: ")
         id = input("Enter id: ")
-        transaction = Client.Client.make_transaction(d, a, c, pt, tt, id)
+        transaction = TypeOfTransaction(d, int(a), c, pt, tt, int(id))
         transaction.save()
-        print("Transaction saved")
-    #     >>>> Transaction saved
-    #     opulod statistic czyli zrobienie statystyk edytowanie ususawnie i wysweitlanie ich i w sumie tyle poczytaj o dacie i bedzie git
     if choice == '2':
         print("Enter id of transaction to edit")
         id = input("Enter id: ")
         for i in transactions:
-            if i.id == id:
-                i.edit(id)
+            if i.id == int(id):
+                i.edit(int(id))
                 print("Transaction edited")
-
     if choice == '3':
         print("Enter id of transaction to delete")
         id = input("Enter id: ")
         for i in transactions:
-            if i.id == id:
-                i.delete(id)
+            if i.id == int(id):
+                i.delete(int(id))
                 print("Transaction deleted")
     if choice == '4':
-
-
-
-
-
+        print(">>>>>>>>>>>>>>>>>>>>>>Statistics<<<<<<<<<<<<<<<<<<<<<<<<<<")
+        user.statistics.upload_statistics()
+        user.statistics.show_statistics()
+        print("Category count: ", user.statistics.category_count)
+        print("Transactions: ")
+        for i in transactions:
+            print(i.date, i.amount, i.category, i.payment_type, i.transaction_type, i.id)

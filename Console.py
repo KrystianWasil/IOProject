@@ -1,28 +1,35 @@
-import Client
+# Main application
+import os
+
+from Client import Client
+from Collections import transactions
 from LogIn import LogIn
 from SignIn import SignIn
-from Collections import users
-from Transactions import transactions, TypeOfTransaction
-from os import system
+from Transactions import TypeOfTransaction
 
-# Bank app
-# User to my
+file_name = 'users.txt'
+if not os.path.exists(file_name):
+    open(file_name, 'w').close()
+
 user = None
 print("Welcome to the bank app "
       "\n1. Log in"
       "\n2. Sign in")
 choice = input("Enter your choice: ")
+
 if choice == '1':
-    curr_login = LogIn(users)
+    curr_login = LogIn(file_name)
     print("Type: login and password\n")
     login = input("Enter your login: ")
     p = input("Enter your password: ")
-    if not curr_login.log_in(login, p) is None:
-        user = curr_login.log_in(login, p)
+    user = curr_login.log_in(login, p)
+    if user:
         print("Logged in")
-#     >>>> User logged in
+    else:
+        print("Invalid login or password")
+
 if choice == '2':
-    sign_in = SignIn(users)
+    sign_in = SignIn(file_name)
     print("Type: name, login, id, password\n")
     n = input("Enter your name: ")
     login = input("Enter your login: ")
@@ -32,31 +39,28 @@ if choice == '2':
     sign_in.set_login(login)
     sign_in.set_id(int(i))
     sign_in.set_password(p)
-    user = Client.Client(n, i, p, login)
+    user = Client(n, i, p, login)
     sign_in.add_to_users(user)
     print("Signed in\n")
 
-#     >>>> User signed in
-
-while True:
+while user:
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     print("Choose your activity: ")
 
     print("1. Make transaction\n"
           "2. Edit transaction\n"
           "3. Delete transaction\n"
-          "4. Show statistics\n"
-          )
+          "4. Show statistics\n")
     choice = input("Enter choice: ")
     if choice == '1':
         print("Enter Transaction")
-        d = input("Enter date: ")
+        d = input("Enter date (dd-mm-yyyy): ")
         a = input("Enter amount: ")
         c = input("Enter category: ")
         pt = input("Enter payment type: ")
-        tt = input("Enter transaction type: ")
+        tt = input("Enter transaction type (Income/Outcome): ")
         id = input("Enter id: ")
-        transaction = TypeOfTransaction(d, int(a), c, pt, tt, int(id))
+        transaction = TypeOfTransaction(d, float(a), c, pt, tt, int(id))
         transaction.save()
     if choice == '2':
         print("Enter id of transaction to edit")

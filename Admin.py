@@ -7,8 +7,7 @@ def verification_of_login(client):
         return True
     return False
 
-
 def verification_of_signing_in(client):
-    if re.match(r'^[a-zA-Z]+$', client.name and client.surname):
+    if re.match(r'^[a-zA-Z]+$', client.name):
         return True
-    return True
+    return False

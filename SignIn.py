@@ -1,12 +1,10 @@
-
 class SignIn:
-
-    def __init__(self, users):
+    def __init__(self, file_name):
         self.name = None
         self.login = None
         self.id = None
         self.password = None
-        self.users = users
+        self.file_name = file_name
 
     def set_password(self, password: str) -> None:
         self.password = password
@@ -21,4 +19,5 @@ class SignIn:
         self.name = name
 
     def add_to_users(self, user) -> None:
-        self.users.append(user)
+        with open(self.file_name, 'a+') as file:
+            file.write(f"{user.name} {user.login} {user.id} {user.password}\n")

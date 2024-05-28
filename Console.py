@@ -50,7 +50,8 @@ while user:
     print("1. Make transaction\n"
           "2. Edit transaction\n"
           "3. Delete transaction\n"
-          "4. Show statistics\n")
+          "4. Show statistics\n"
+          "5. Exit")
     choice = input("Enter choice: ")
     if choice == '1':
         print("Enter Transaction")
@@ -84,3 +85,6 @@ while user:
         print("Transactions: ")
         for i in transactions:
             print(i.date, i.amount, i.category, i.payment_type, i.transaction_type, i.id)
+    if choice == '5':
+        break
+    # os.system('clear') # Clear the console
